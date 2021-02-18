@@ -79,7 +79,7 @@ class _AbstractUserge(Methods, RawClient):
     async def _load_plugins(self) -> None:
         _IMPORTED.clear()
         _INIT_TASKS.clear()
-        logbot.edit_last_msg("Importing All Plugins", _LOG.info, _LOG_STR)
+        logbot.edit_last_msg("🌐 Importing All Plugins", _LOG.info, _LOG_STR)
         for name in get_all_plugins():
             try:
                 await self.load_plugin(name)
@@ -93,7 +93,7 @@ class _AbstractUserge(Methods, RawClient):
         """ Reload all Plugins """
         self.manager.clear_plugins()
         reloaded: List[str] = []
-        _LOG.info(_LOG_STR, "Reloading All Plugins")
+        _LOG.info(_LOG_STR, "🌐 Reloading All Plugins")
         for imported in _IMPORTED:
             try:
                 reloaded_ = importlib.reload(imported)
@@ -107,9 +107,9 @@ class _AbstractUserge(Methods, RawClient):
 
 
 class UsergeBot(_AbstractUserge):
-    """ USERGE-X Bot """
+    """ DAMIEN-X Bot """
     def __init__(self, **kwargs) -> None:
-        _LOG.info(_LOG_STR, "Setting X-BOT Configs")
+        _LOG.info(_LOG_STR, "⚙ Setting X-BOT Configs")
         super().__init__(session_name=":memory:", **kwargs)
 
     @property
@@ -124,7 +124,7 @@ class Userge(_AbstractUserge):
     has_bot = bool(Config.BOT_TOKEN)
 
     def __init__(self, **kwargs) -> None:
-        _LOG.info(_LOG_STR, "Setting USERGE-X Configs")
+        _LOG.info(_LOG_STR, "⚙ Setting DAMIEN-X Configs")
         kwargs = {
             'api_id': Config.API_ID,
             'api_hash': Config.API_HASH,
@@ -151,10 +151,10 @@ class Userge(_AbstractUserge):
 
     async def start(self) -> None:
         """ start client and bot """
-        _LOG.info(_LOG_STR, "Starting USERGE-X")
+        _LOG.info(_LOG_STR, "☑ Starting DAMIEN-X")
         await super().start()
         if self._bot is not None:
-            _LOG.info(_LOG_STR, "Starting X-Bot")
+            _LOG.info(_LOG_STR, "☑ Starting X-Bot")
             await self._bot.start()
         await self._load_plugins()
 
@@ -163,7 +163,7 @@ class Userge(_AbstractUserge):
         if self._bot is not None:
             _LOG.info(_LOG_STR, "Stopping X-Bot")
             await self._bot.stop()
-        _LOG.info(_LOG_STR, "Stopping USERGE-X")
+        _LOG.info(_LOG_STR, "⚠️ Stopping DAMIEN-X")
         await super().stop()
         _close_db()
         pool._stop()  # pylint: disable=protected-access
@@ -186,11 +186,11 @@ class Userge(_AbstractUserge):
             [t.cancel() for t in asyncio.all_tasks() if t is not asyncio.current_task()]
             await self.loop.shutdown_asyncgens()
             self.loop.stop()
-            _LOG.info(_LOG_STR, "Loop Stopped !")
+            _LOG.info(_LOG_STR, "⚠️ Loop Stopped !")
 
         async def _shutdown(_sig: signal.Signals) -> None:
             global _SEND_SIGNAL  # pylint: disable=global-statement
-            _LOG.info(_LOG_STR, f"Received Stop Signal [{_sig.name}], Exiting USERGE-X ...")
+            _LOG.info(_LOG_STR, f"Received Stop Signal [{_sig.name}], Exiting DAMIEN-X ...")
             await _finalize()
             if _sig == _sig.SIGUSR1:
                 _SEND_SIGNAL = True
@@ -201,7 +201,7 @@ class Userge(_AbstractUserge):
         self.loop.run_until_complete(self.start())
         for task in self._tasks:
             running_tasks.append(self.loop.create_task(task()))
-        logbot.edit_last_msg("USERGE-X has Started Successfully !")
+        logbot.edit_last_msg("✅ DAMIEN-X Has Started Successfully !")
         logbot.end()
         mode = "[DUAL]" if RawClient.DUAL_MODE else "[BOT]" if Config.BOT_TOKEN else "[USER]"
         try:
@@ -209,13 +209,13 @@ class Userge(_AbstractUserge):
                 _LOG.info(_LOG_STR, f"Running Coroutine - {mode}")
                 self.loop.run_until_complete(coro)
             else:
-                _LOG.info(_LOG_STR, f"Idling USERGE-X - {mode}")
+                _LOG.info(_LOG_STR, f"⭕ Idling DAMIEN-X - {mode}")
                 idle()
             self.loop.run_until_complete(_finalize())
         except (asyncio.exceptions.CancelledError, RuntimeError):
             pass
         finally:
             self.loop.close()
-            _LOG.info(_LOG_STR, "Loop Closed !")
+            _LOG.info(_LOG_STR, "⛔ Loop Closed !")
             if _SEND_SIGNAL:
                 os.kill(os.getpid(), signal.SIGUSR1)
