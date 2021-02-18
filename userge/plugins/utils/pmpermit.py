@@ -24,7 +24,7 @@ PMPERMIT_MSG = {}
 pmCounter: Dict[int, int] = {}
 allowAllFilter = filters.create(lambda _, __, ___: Config.ALLOW_ALL_PMS)
 noPmMessage = bk_noPmMessage = (
-    "Hello {fname} this is an automated message\n"
+    "Hello {mention} This is an automated message\n"
     "Please wait until you get approved to direct message "
     "And please dont spam until then "
 )
@@ -295,7 +295,7 @@ async def uninvitedPmHandler(message: Message):
         PMPERMIT_MSG[message.from_user.id] = (
             await message.reply(
                 noPmMessage.format_map(SafeDict(**user_dict))
-                + "\n`- Protected by USERGE-X`"
+                + "\n● Protected By: @AmineSoukara"
             )
         ).message_id
         await asyncio.sleep(1)
