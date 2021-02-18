@@ -107,17 +107,17 @@ class Config:
 
 
 def get_version() -> str:
-    """ get USERGE-X version """
+    """ get DAMIEN-X version """
     ver = f"{versions.__major__}.{versions.__minor__}.{versions.__micro__}"
     try:
-        if "/code-rgb/userge-x" in Config.UPSTREAM_REPO.lower():
+        if "/aminesoukara/damien-x" in Config.UPSTREAM_REPO.lower():
             diff = list(_REPO.iter_commits(f'v{ver}..HEAD'))
             if diff:
                 return f"{ver}-LOGAN.{len(diff)}"
         else:
             diff = list(_REPO.iter_commits(f'{Config.UPSTREAM_REMOTE}/alpha..HEAD'))
             if diff:
-                return f"{ver}-fork-[X].{len(diff)}"
+                return f"{ver}-Fork-[X].{len(diff)}"
     except Exception as e:
         _LOG.error(e)
         return " Check Update"
