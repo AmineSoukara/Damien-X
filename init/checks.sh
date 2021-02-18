@@ -51,11 +51,11 @@ _checkDefaultVars() {
         [PREFERRED_LANGUAGE]="en"
         [DOWN_PATH]="downloads"
         [UPSTREAM_REMOTE]="upstream"
-        [UPSTREAM_REPO]="https://github.com/code-rgb/USERGE-X"
+        [UPSTREAM_REPO]="https://github.com/AmineSoukara/DAMIEN-X"
         [LOAD_UNOFFICIAL_PLUGINS]=true
         [G_DRIVE_IS_TD]=true
         [CMD_TRIGGER]="."
-        [SUDO_TRIGGER]="!"
+        [SUDO_TRIGGER]="/"
         [FINISHED_PROGRESS_STR]="█"
         [UNFINISHED_PROGRESS_STR]="░"
     )
@@ -163,14 +163,14 @@ _checkUpstreamRepo() {
 }
 
 _checkUnoffPlugins() {
-    editLastMessage "Checking USERGE-X [Extra] Plugins ..."
+    editLastMessage "💬 Checking Damien-X [Extra] Plugins ..."
     if test $LOAD_UNOFFICIAL_PLUGINS = true; then
-        editLastMessage "\tLoading USERGE-X [Extra] Plugins ..."
-        replyLastMessage "\t\tClonning ..."
+        editLastMessage "\t⏳ Loading Damien-X [Extra] Plugins ..."
+        replyLastMessage "\t\t⚡ Clonning ..."
         gitClone --depth=1 https://github.com/code-rgb/Userge-Plugins.git
-        editLastMessage "\t\tUpgrading PIP ..."
+        editLastMessage "\t\t🌐 Upgrading PIP ..."
         upgradePip
-        editLastMessage "\t\tInstalling Requirements ..."
+        editLastMessage "\t\t🌐 Installing Requirements ..."
         installReq Userge-Plugins
         editLastMessage "\t\tCleaning ..."
         rm -rf userge/plugins/unofficial/
@@ -178,9 +178,9 @@ _checkUnoffPlugins() {
         cp -r Userge-Plugins/resources/* resources/
         rm -rf Userge-Plugins/
         deleteLastMessage
-        editLastMessage "\tUSERGE-X [Extra] Plugins Loaded Successfully !"
+        editLastMessage "\t⚙ Damien-X [Extra] Plugins Loaded Successfully !"
     else
-        editLastMessage "\tUSERGE-X [Extra] Plugins Disabled !"
+        editLastMessage "\t⚙ Damien-X [Extra] Plugins Disabled !"
     fi
     deleteLastMessage
 }
