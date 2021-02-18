@@ -24,7 +24,7 @@ BOT_BAN = get_collection("BOT_BAN")
 BOT_START = get_collection("BOT_START")
 LOGO_ID = None
 _CHAT, _MSG_ID = None, None
-_DEFAULT = "https://t.me/useless_x/2"
+_DEFAULT = "https://t.me/DamienOT/10"
 
 # refresh file id from TG server
 
@@ -46,14 +46,14 @@ if userge.has_bot:
 Hello {f_name},
 Nice To Meet You! I'm **{bot.first_name}** A Bot.
 
-        <i><b>Powered by</i> [USERGE-X](https://t.me/x_xtests)</b>
+        <i><b>Powered by</i> [DAMIEN-SOUKARA](https://t.me/DamienSoukara)</b>
 
 <b>My Master is: {master.first_name}</b>
 <i>You can contact my <b>Master</b> and checkout the <b>Repo</b> For more info.</i>
 """
         if Config.BOT_FORWARDS:
             hello += "\n<b>NOTE: </b> "
-            hello += "**Bot Forwarding is** :  ☑️ `Enabled`\n"
+            hello += "**Bot Forwarding is** :  ✅ `Enabled`\n"
             hello += "All your messages here will be forwarded to my **MASTER**"
         if u_id not in Config.OWNER_ID:
             found = await BOT_START.find_one({"user_id": u_id})
@@ -132,7 +132,7 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
                         [
                             InlineKeyboardButton("CONTACT", url=f"t.me/{u_n}"),
                             InlineKeyboardButton(
-                                "REPO", url="https://github.com/code-rgb/USERGE-X"
+                                "DEPLOY", url="https://github.com/AmineSoukara/DAMIEN-X"
                             ),
                         ],
                         [
@@ -162,7 +162,7 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
             )
         else:
             await callback_query.answer(
-                "ONLY MY MASTER CAN DO THAT ! \n\n 𝘿𝙚𝙥𝙡𝙤𝙮 𝙮𝙤𝙪𝙧 𝙤𝙬𝙣 𝙐𝙎𝙀𝙍𝙂𝙀-𝙓 !",
+                "ONLY MY MASTER CAN DO THAT ! \n\n Deploy Your Own Damien-X !",
                 show_alert=True,
             )
 
