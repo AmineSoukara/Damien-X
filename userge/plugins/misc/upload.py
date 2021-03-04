@@ -76,7 +76,7 @@ async def upload_to_tg(message: Message):
     """ upload to telegram """
     path_ = message.filtered_input_str
     if not path_:
-        await message.edit("Machi Haka 😑 Dir /anime + Link | Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
+        await message.edit("Machi Haka 😑 Dir /se + Link | Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
         return
     is_url = re.search(r"(?:https?|ftp)://[^|\s]+\.[^|\s]+", path_)
     del_path = False
