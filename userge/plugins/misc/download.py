@@ -24,7 +24,7 @@ from userge.utils.exceptions import ProcessCanceled
 LOGGER = userge.getLogger(__name__)
 
 
-@userge.on_cmd("mo", about={
+@userge.on_cmd("sd", about={
     'header': "Download files to server",
     'usage': "{tr}download [url | reply to telegram media]",
     'examples': "{tr}download https://speed.hetzner.de/100MB.bin | testing upload.bin"},
