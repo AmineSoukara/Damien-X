@@ -32,7 +32,7 @@ CHANNEL = userge.getCLogger(__name__)
 LOGO_PATH = 'resources/logo_x.png'
 
 
-@userge.on_cmd("sr", about={
+@userge.on_cmd("mr", about={
     'header': "Rename telegram files",
     'flags': {
         '-d': "upload as document",
@@ -44,18 +44,18 @@ async def rename_(message: Message):
     if not message.filtered_input_str:
         await message.err("new name not found!")
         return
-    await message.edit("🔴 `Trying To Rename ...`")
+    await message.edit("🟣 `Trying To Rename ...`")
     if message.reply_to_message and message.reply_to_message.media:
         await _handle_message(message)
     else:
-        await message.edit("Machi Haka 😑 Dir Reply Ala Dak Video Lisifti Okteb : /ar + Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
+        await message.edit("Machi Haka 😑 Dir Reply Ala Dak Video Lisifti Okteb : /mr + Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
 
 @userge.on_cmd("convert", about={
     'header': "Convert telegram files",
     'usage': "reply {tr}convert to any media"}, del_pre=True, check_downpath=True)
 async def convert_(message: Message):
     """ convert telegram files """
-    await message.edit("🔴 `Trying To Convert ...`")
+    await message.edit("🟣 `Trying To Convert ...`")
     if message.reply_to_message and message.reply_to_message.media:
         message.text = '' if message.reply_to_message.document else ". -d"
         await _handle_message(message)
@@ -63,7 +63,7 @@ async def convert_(message: Message):
         await message.edit("Please read `.help convert`", del_in=5)
 
 
-@userge.on_cmd("se", about={
+@userge.on_cmd("mo", about={
     'header': "Upload files to telegram",
     'flags': {
         '-d': "upload as document",
@@ -76,7 +76,7 @@ async def upload_to_tg(message: Message):
     """ upload to telegram """
     path_ = message.filtered_input_str
     if not path_:
-        await message.edit("Machi Haka 😑 Dir /se + Link | Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
+        await message.edit("Machi Haka 😑 Dir /mo + Link | Smiya Jdida.mp4 ... Ila Mfhmtich Chi Haja Swel ⚡ @AmineSoukara", del_in=60)
         return
     is_url = re.search(r"(?:https?|ftp)://[^|\s]+\.[^|\s]+", path_)
     del_path = False
@@ -164,7 +164,7 @@ async def doc_upload(message: Message, path, del_path: bool = False,
                      extra: str = '', with_thumb: bool = True):
     str_path = str(path)
     sent: Message = await message.client.send_message(
-        message.chat.id, f"🔴 `Uploading {str_path} As A Doc .🗂. {extra}`")
+        message.chat.id, f"🟣 `Uploading {str_path} As A Doc .🗂. {extra}`")
     start_t = datetime.now()
     thumb = None
     if with_thumb:
@@ -175,11 +175,11 @@ async def doc_upload(message: Message, path, del_path: bool = False,
             chat_id=message.chat.id,
             document=str_path,
             thumb=thumb,
-            caption=f"{path.name} | @SeriesBdarija",
+            caption=f"{path.name} | @MoviesBdarija",
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"🔴 Uploading {extra}", str_path)
+            progress_args=(message, f"🟣 Uploading {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -197,7 +197,7 @@ async def vid_upload(message: Message, path, del_path: bool = False,
                      extra: str = '', with_thumb: bool = True):
     str_path = str(path)
     txt = path.name
-    newx = txt.replace(".mp4", " | @SeriesBdarija")
+    newx = txt.replace(".mp4", " | @MoviesBdarija")
     thumb = None
     if with_thumb:
         thumb = await get_thumb(str_path)
@@ -206,7 +206,7 @@ async def vid_upload(message: Message, path, del_path: bool = False,
     if metadata and metadata.has("duration"):
         duration = metadata.get("duration").seconds
     sent: Message = await message.client.send_message(
-        message.chat.id, f"🔴 `Uploading {str_path} As A Video .🎬. {extra}`")
+        message.chat.id, f"🟣 `Uploading {str_path} As A Video .🎬. {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_video")
     width = 0
@@ -229,7 +229,7 @@ async def vid_upload(message: Message, path, del_path: bool = False,
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"🔴 Uploading {extra}", str_path)
+            progress_args=(message, f"🟣 Uploading {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -273,7 +273,7 @@ async def audio_upload(message: Message, path, del_path: bool = False,
     if metadata and metadata.has("duration"):
         duration = metadata.get("duration").seconds
     sent: Message = await message.client.send_message(
-        message.chat.id, f"🔴 `Uploading {str_path} As Audio .🎶. {extra}`")
+        message.chat.id, f"🟣 `Uploading {str_path} As Audio .🎶. {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_audio")
     try:
@@ -288,7 +288,7 @@ async def audio_upload(message: Message, path, del_path: bool = False,
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"🔴 Uploading {extra}", str_path)
+            progress_args=(message, f"🟣 Uploading {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -308,18 +308,18 @@ async def audio_upload(message: Message, path, del_path: bool = False,
 async def photo_upload(message: Message, path, del_path: bool = False, extra: str = ''):
     str_path = str(path)
     sent: Message = await message.client.send_message(
-        message.chat.id, f"🔴 `Uploading {path.name} As Photo .🖼. {extra}`")
+        message.chat.id, f"🟣 `Uploading {path.name} As Photo .🖼. {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_photo")
     try:
         msg = await message.client.send_photo(
             chat_id=message.chat.id,
             photo=str_path,
-            caption=f"{path.name} | @SeriesBdarija",
+            caption=f"{path.name} | @MoviesBdarija",
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"🔴 Uploading {extra}", str_path)
+            progress_args=(message, f"🟣 Uploading {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -373,4 +373,4 @@ async def finalize(message: Message, msg: Message, start_t):
     else:
         end_t = datetime.now()
         m_s = (end_t - start_t).seconds
-        await message.edit(f"🔴 Uploaded In {m_s} seconds", del_in=20)
+        await message.edit(f"🟣 Uploaded In {m_s} seconds", del_in=20)
