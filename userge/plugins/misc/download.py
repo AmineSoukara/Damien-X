@@ -24,7 +24,7 @@ from userge.utils.exceptions import ProcessCanceled
 LOGGER = userge.getLogger(__name__)
 
 
-@userge.on_cmd("sd", about={
+@userge.on_cmd("md", about={
     'header': "Download files to server",
     'usage': "{tr}download [url | reply to telegram media]",
     'examples': "{tr}download https://speed.hetzner.de/100MB.bin | testing upload.bin"},
@@ -57,7 +57,7 @@ async def handle_download(message: Message, resource: Union[Message, str]) -> Tu
 
 async def url_download(message: Message, url: str) -> Tuple[str, int]:
     """ download from link """
-    await message.edit("🔴 `Downloading From URL...`")
+    await message.edit("🟣 `Downloading From URL...`")
     start_t = datetime.now()
     custom_file_name = unquote_plus(os.path.basename(url))
     if "|" in url:
@@ -87,9 +87,9 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
                     "**🗂 Completed** : {}\n" + \
                     "**💾 Total** : {}\n" + \
                     "**🚀 Speed** : {}\n" + \
-                    "**⏱ ETA** : {}\n©️ @DamienSoukara | @SeriesBdarija"
+                    "**⏱ ETA** : {}\n©️ @DamienSoukara | @MoviesBdarija"
         progress_str = progress_str.format(
-            "🔴 Trying To Download",
+            "🟣 Trying To Download",
             ''.join((Config.FINISHED_PROGRESS_STR
                      for _ in range(math.floor(percentage / 5)))),
             ''.join((Config.UNFINISHED_PROGRESS_STR
@@ -111,7 +111,7 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
 
 async def tg_download(message: Message, to_download: Message) -> Tuple[str, int]:
     """ download from tg file """
-    await message.edit("🔴 `Downloading From TG...`")
+    await message.edit("🟣 `Downloading From TG...`")
     start_t = datetime.now()
     custom_file_name = Config.DOWN_PATH
     if message.filtered_input_str:
@@ -120,7 +120,7 @@ async def tg_download(message: Message, to_download: Message) -> Tuple[str, int]
         message=to_download,
         file_name=custom_file_name,
         progress=progress,
-        progress_args=(message, "🔴 Trying To Download")
+        progress_args=(message, "🟣 Trying To Download")
     )
     if message.process_is_canceled:
         raise ProcessCanceled
