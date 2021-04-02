@@ -70,10 +70,7 @@ REPO_X = InlineQueryResultArticle(
                 ),
                 InlineKeyboardButton(
                     "🚀 Deploy DAMIEN-X",
-                    url=(
-                        "https://heroku.com/deploy?template="
-                        "https://github.com/"
-                    ),
+                    url=("https://heroku.com/deploy?template=" "https://github.com/"),
                 ),
             ]
         ]
